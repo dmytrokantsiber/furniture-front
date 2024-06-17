@@ -1,0 +1,16 @@
+import { ICartItem } from "../../types/cart.types";
+import { compareProductConfiguration } from "./compareProductConfiguration";
+
+export const findCartItem = (
+  items: ICartItem[],
+  payload: ICartItem
+): number => {
+  const existingItemIndex = items.findIndex(
+    (cartItem) =>
+      compareProductConfiguration(
+        cartItem.configuration,
+        payload.configuration
+      ) && cartItem.item.productCode === payload.item.productCode
+  );
+  return existingItemIndex;
+};
